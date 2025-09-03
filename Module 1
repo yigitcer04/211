@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class NumberGuessingGame {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        int number = (int)(Math.random() * 10) + 1; // random 1-10
+        int guesses = 0;
+        int maxGuesses = 5;
+
+        while (guesses < maxGuesses) {
+            System.out.print("Guess a number between 1 and 10: ");
+            int guess = input.nextInt();
+            guesses++;
+
+            if (guess == number) {
+                System.out.println("Congratulations! You've guessed the correct number.");
+                break;
+            } else if (guess > number) {
+                System.out.println("Too high, try again.");
+            } else {
+                System.out.println("Too low, try again.");
+            }
+
+            if (guesses == maxGuesses) {
+                System.out.println("Out of guesses! The correct number was " + number);
+            }
+        }
+
+        input.close();
+    }
+}
