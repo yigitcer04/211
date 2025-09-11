@@ -1,0 +1,47 @@
+import java.util.ArrayList;
+
+class Bank {
+    private double amount; // balance
+    private ArrayList<Double> transactions; // keeps track of deposits/withdrawals
+
+    // Constructor
+    public Bank(double initialAmount) {
+        this.amount = initialAmount;
+        this.transactions = new ArrayList<>();
+    }
+
+    // Deposit method
+    public void deposit(double money) {
+        if (money > 0) {
+            amount += money;
+            transactions.add(money); // positive for deposit
+            System.out.println("Deposited: " + money);
+        } else {
+            System.out.println("Deposit must be positive!");
+        }
+    }
+
+    // Withdrawal method
+    public void withdraw(double money) {
+        if (money > 0 && money <= amount) {
+            amount -= money;
+            transactions.add(-money); // negative for withdrawal
+            System.out.println("Withdrew: " + money);
+        } else {
+            System.out.println("Insufficient balance or invalid amount!");
+        }
+    }
+
+    // List all deposits/withdrawals
+    public void listInteractions() {
+        System.out.println("Transaction History:");
+        for (double t : transactions) {
+            System.out.println(t);
+        }
+    }
+
+    // Check balance
+    public double getBalance() {
+        return amount;
+    }
+}
