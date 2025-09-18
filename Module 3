@@ -1,0 +1,72 @@
+// Automobile.java
+public class Automobile {
+    int modelYear;
+    String brand;
+
+    public Automobile(int year, String brand) {
+        this.modelYear = year;
+        this.brand = brand;
+    }
+
+    public void honk() { System.out.println("Beep!"); }
+    public void accelerate() { System.out.println(brand + " accelerates."); }
+    public void stop() { System.out.println(brand + " stops."); }
+    public void reverse() { System.out.println(brand + " reverses."); }
+
+    // equals, toString, compareTo
+    public boolean equals(Object o) {
+        if (o instanceof Automobile) {
+            Automobile other = (Automobile)o;
+            return this.modelYear == other.modelYear && this.brand.equals(other.brand);
+        }
+        return false;
+    }
+    public String toString() { return modelYear + " " + brand; }
+    public int compareTo(Automobile other) {
+        return this.modelYear - other.modelYear;
+    }
+}
+
+// Car.java
+public class Car extends Automobile {
+    public Car(int y, String b) { super(y, b); }
+    @Override public void honk() { System.out.println("Car honk!"); }
+}
+
+// SportsCar.java
+public class SportsCar extends Automobile {
+    public SportsCar(int y, String b) { super(y, b); }
+    @Override public void honk() { System.out.println("SportsCar HONK!"); }
+    @Override public void accelerate() { System.out.println(brand + " zooms fast!"); }
+}
+
+// JunkCar.java
+public class JunkCar extends Automobile {
+    public JunkCar(int y, String b) { super(y, b); }
+    @Override public void honk() { System.out.println("JunkCar wheeze..."); }
+    @Override public void accelerate() { System.out.println(brand + " barely moves."); }
+}
+
+// Tester.java
+public class Tester {
+    public static void main(String[] args) {
+        Automobile[] autos = {
+            new Car(2020, "Toyota"),
+            new SportsCar(2023, "Ferrari"),
+            new JunkCar(1999, "Oldsmobile")
+        };
+
+        for (Automobile a : autos) {
+            System.out.println(a);
+            a.honk();
+            a.accelerate();
+            a.reverse();
+            a.stop();
+            System.out.println();
+        }
+
+        // Test equals + compareTo
+        System.out.println("Equals test: " + autos[0].equals(new Car(2020,"Toyota")));
+        System.out.println("Compare test: " + autos[1].compareTo(autos[0]));
+    }
+}
